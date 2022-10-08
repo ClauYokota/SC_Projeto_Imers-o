@@ -1,0 +1,40 @@
+<div>
+    <h2 mat-dialog-title>Novo Cargo</h2>
+    <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoCargo"></mat-spinner>
+    <button mat-icon-button color="accent" (click)="confirmarSaida()" matTooltip="Voltar para a lista de cargo" aria-label="Botão de voltar para a página anterior"><mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+  <section mat-dialog-content>
+    <form action="" [formGroup]="formCargo" (ngSubmit)="salvar()">
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input
+          type="text"
+          placeholder="Ex: Desenv. Java JR"
+          matInput
+          formControlName="nome"
+        >
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Descrição</mat-label>
+        <input
+          type="text"
+          placeholder="Ex: xxxxxxxxx"
+          matInput
+          formControlName="descricao"
+        >
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Salário</mat-label>
+        <input
+          type="number"
+          placeholder="Ex: R$3.000,00"
+          matInput
+          formControlName="salario"
+        >
+      </mat-form-field>
+      
+      <button type="submit" [disabled]="formCargo.invalid" mat-raised-button color="accent" id="salvar" matTooltip="Salvar">Salvar</button>
+    </form>
+  </section>
+  

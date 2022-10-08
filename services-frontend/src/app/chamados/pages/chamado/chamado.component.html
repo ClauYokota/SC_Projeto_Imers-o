@@ -1,0 +1,67 @@
+<div class="loader" *ngIf="chamado == undefined; else principal">
+  <p>{{ naoEncontrado == true ? 'Chamado não encontrado' : 'Procurando chamado...' }}</p>
+  <mat-spinner mode="indeterminate" color="primary" *ngIf="naoEncontrado == false"></mat-spinner>
+</div>
+<ng-template #principal>
+  <mat-card>
+
+    <mat-card-header>
+      
+      <mat-card-title>Chamado {{chamado.idChamado}}:  {{chamado.titulo }}</mat-card-title>
+      <button mat-icon-button color="primary" matTooltip="Menu" id="menu" [mat-menu-trigger-for]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/chamados" matTooltip="Voltar">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+          Voltar
+        </button>
+
+        <button mat-menu-item matTooltip="Deletar Funcionário" (click)="deletar()">
+          <mat-icon>delete</mat-icon>
+          Deletar funcionário
+        </button>
+      </mat-menu>
+
+    </mat-card-header>
+
+    <mat-card-content>
+      <form action="" [formGroup]="formChamado" (ngSubmit)="salvarAtualizacoes()">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Titulo</mat-label>
+          <input type="text" matInput placeholder="Novo titulo" formControlName="titulo">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Descrição</mat-label>
+          <input type="text" matInput placeholder="Descrição" formControlName="descricao">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" name="status">
+            <mat-option *ngFor="let st of status" [value]="st">
+              {{st}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Funcionário</mat-label>
+          <mat-select formControlName="funcionario" name="funcionario">
+            <mat-option *ngFor="let funcionario of funcionarios" [value]="funcionario.idFuncionario">
+              {{funcionario.nome}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button color="accent" id="salvar" [disabled]="desabilitar" matTooltip="Salvar Atualizações">Salvar
+          atualizações</button>
+        
+          
+      </form>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

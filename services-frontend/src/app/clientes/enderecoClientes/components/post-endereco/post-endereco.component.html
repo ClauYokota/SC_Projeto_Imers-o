@@ -1,0 +1,51 @@
+<div>
+    <h2 mat-dialog-title>Novo Endereco</h2>
+    <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoEndereco"></mat-spinner>
+    <button mat-icon-button color="accent" (click)="confirmarSaida()" matTooltip="Voltar para a lista de clientes" aria-label="Botão de voltar para a página anterior"><mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+  <section mat-dialog-content>
+    <form action="" [formGroup]="formEndereco" (ngSubmit)="salvar()">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Rua</mat-label>
+        <input
+          type="text"
+          placeholder="Ex: Presidente Vargas"
+          matInput
+          formControlName="rua"
+        >
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Bairro</mat-label>
+        <input
+          type="text"
+          placeholder="Ex: Copacabana "
+          matInput
+          formControlName="bairro"
+        >
+      </mat-form-field>
+   
+      <mat-form-field appearance="fill">
+        <mat-label>Cidade</mat-label>
+        <input
+          type="text"
+          placeholder="Ex: Rio de Janeiro "
+          matInput
+          formControlName="cidade"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>UF</mat-label>
+        <input
+          type="text"
+          placeholder="Ex: RJ "
+          maxlength="2"
+          matInput
+          formControlName="uf"
+        >
+      </mat-form-field>
+    
+      <button type="submit" [disabled]="formEndereco.invalid" mat-raised-button color="accent" id="salvar" matTooltip="Salvar">Salvar</button>
+    </form>
+  </section>

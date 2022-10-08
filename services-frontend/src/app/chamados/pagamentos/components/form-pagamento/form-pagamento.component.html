@@ -1,0 +1,31 @@
+<div>
+    <h2 mat-dialog-title>Novo Pagamento</h2>
+    <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoPagamento"></mat-spinner>
+    <button mat-icon-button color="accent" (click)="confirmarSaida()" matTooltip="Voltar para a lista de cargo" aria-label="Botão de voltar para a página anterior"><mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+  <section mat-dialog-content>
+    <form action="" [formGroup]="formPagamento" (ngSubmit)="salvar()">
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Valor</mat-label>
+        <input
+          type="number"
+          placeholder="Ex: R$500,00"
+          matInput
+          formControlName="valor"
+        >
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Forma de Pagamento</mat-label>
+        <mat-select formControlName="formPagamento" name="formPagamento">
+          <mat-option *ngFor="let fPg of formaPagamento" [value]="fPg">
+            {{fPg}}
+          </mat-option>
+
+        </mat-select>
+      </mat-form-field>
+      
+      <button type="submit" [disabled]="formPagamento.invalid" mat-raised-button color="accent" id="salvar" matTooltip="Salvar">Salvar</button>
+    </form>
+  </section>
+  

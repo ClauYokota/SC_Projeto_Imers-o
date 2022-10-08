@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>    
+    <h6>Sua sessão vai expirar em {{authService.tokenExp()|date:'dd/M/yyyy '}}às{{authService.tokenExp()|date:' HH:mm'}}h</h6>
+    <span class="separador"></span>      
+    <h3>{{authService.email()}}</h3>
+    <span class="separador"></span>
+    <button mat-button [matMenuTriggerFor]="menu" matTooltip="Menu"><mat-icon>menu</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <a
+        mat-menu-item
+        routerLink="/funcionarios"
+      ><mat-icon>people</mat-icon>Funcionários</a>
+      <a
+        mat-menu-item
+        routerLink="/cargos"
+      ><mat-icon>category</mat-icon>Cargos</a>
+      <a
+        mat-menu-item
+        routerLink="/clientes"
+      ><mat-icon>people_outline</mat-icon>Clientes</a>
+      <a
+        mat-menu-item
+        routerLink="/chamados"
+      ><mat-icon>event_note</mat-icon>Chamados</a>
+    </mat-menu>
+
+    <button mat-icon-button matTooltip="Logout" (click)="logOut()">
+      <mat-icon>logout</mat-icon>
+    </button>    
+  </mat-toolbar-row>
+</mat-toolbar>

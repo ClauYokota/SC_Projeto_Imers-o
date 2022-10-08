@@ -1,0 +1,121 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <aside id="lateral">
+    <h2></h2>
+  </aside>
+  <main>
+    <button mat-mini-fab color="accent" (click)="abrirFormChamados()" id="add" matTooltip="Abrir Chamado">
+      <mat-icon>add</mat-icon>
+    </button>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+    <table mat-table [dataSource]="chamados" class="mat-elevation-z24">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let ch">{{ ch.idChamado }}</td>
+      </ng-container>
+      <ng-container matColumnDef="titulo">
+        <th mat-header-cell *matHeaderCellDef>Título</th>
+        <td mat-cell *matCellDef="let ch">
+          <a
+            [routerLink]="'/chamados/' + ch.idChamado"
+            routerLinkActive="ativo"
+            >{{ ch.titulo }}</a
+          >
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef>Descrição</th>
+        <td mat-cell *matCellDef="let ch">{{ ch.descricao }}</td>
+      </ng-container>
+      <ng-container matColumnDef="dataEntrada">
+        <th mat-header-cell *matHeaderCellDef>Data de Entrada</th>
+        <td mat-cell *matCellDef="let ch">
+          {{ ch.dataEntrada | date: "mediumDate" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let ch">{{ ch.status }}</td>
+      </ng-container>
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell *matHeaderCellDef>Cliente</th>
+        <td mat-cell *matCellDef="let ch">{{ ch.cliente.nome }}</td>
+      </ng-container>
+      <ng-container matColumnDef="funcionario">
+        <th mat-header-cell *matHeaderCellDef>Funcionário</th>
+        <td mat-cell *matCellDef="let ch">
+          <div *ngIf="ch.funcionario != null; else cadastrarFuncionario">
+            {{ ch.funcionario.nome }}
+          </div>
+          <ng-template #cadastrarFuncionario>
+            <button
+              mat-icon-button
+              color="basic"
+              matTooltip="Inserir Funcionário"
+              (click)="abrirAddFuncionario(ch)"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="pagamento">
+        <th mat-header-cell *matHeaderCellDef>Pagamento</th>
+        <td mat-cell *matCellDef="let ch">
+          <mat-accordion *ngIf="ch.pagamento != null; else cadastrarPagamento">
+            <mat-expansion-panel hideToggle style="max-width: 380px; max-height: 200px;">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ ch.pagamento.status }}
+                </mat-panel-title>
+                <button
+                  mat-icon-button
+                  color="basic"
+                  matTooltip="Editar Pagamento"
+                  (click)="abrirEditarPagamento(ch.pagamento)"
+                >
+                  <mat-icon class="mat-icon-formularios">edit</mat-icon>
+                </button>
+              </mat-expansion-panel-header>
+              <ul type="none">
+                <li>
+                    <i>Valor: </i> {{ ch.pagamento.valor }}
+                </li>
+                <li>
+                    <i>Forma de pagamento: </i>{{ ch.pagamento.formPagamento }}
+                </li>
+                <li>
+                    <i>Status: </i> {{ ch.pagamento.status }}
+                </li>
+              </ul>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <ng-template #cadastrarPagamento>
+            <button
+              mat-icon-button
+              color="basic"
+              matTooltip="Inserir Pagamento"
+              (click)="abrirFormPagamentos(ch.idChamado)"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Excluir</th>
+        <td mat-cell *matCellDef="let ch">
+          <button mat-icon-button color="warn" matTooltip="Deletar Chamado" (click)="deletarChamado(ch)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+      <tr mat-row *matRowDef="let row; columns: colunas"></tr>
+    </table>
+  </main>
+</div>

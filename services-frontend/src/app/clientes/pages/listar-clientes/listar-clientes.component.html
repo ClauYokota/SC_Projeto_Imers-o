@@ -1,0 +1,91 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <aside id="lateral">
+
+  </aside>
+  <main>
+    <button mat-mini-fab color="accent" (click)="abrirFormCliente()" id="add" matTooltip="Inserir Cliente">
+      <mat-icon>add</mat-icon>
+    </button>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+    <table mat-table [dataSource]="clientes" class="mat-elevation-z24">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let cl">{{ cl.idCliente }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let cl">
+          <a [routerLink]="'/clientes/' + cl.idCliente" routerLinkActive="ativo">
+            {{ cl.nome }}
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let cl">{{ cl.email }}</td>
+      </ng-container>
+
+
+
+      <ng-container matColumnDef="endereco">
+        <th mat-header-cell *matHeaderCellDef>Endereço (UF)</th>
+
+        <td mat-cell *matCellDef="let cl">
+          <mat-accordion *ngIf="cl.enderecoCliente != null; else adicionarEndereco">
+            <mat-expansion-panel hideToggle style="max-width: 380px; max-height: 200px;">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ cl.enderecoCliente.uf }}
+                </mat-panel-title>
+                <button mat-icon-button (click)="putEndereco(cl.enderecoCliente)" matTooltip="Editar Endereço">
+                  <mat-icon id="btnEditarEndereco" class="mat-icon-formularios">edit</mat-icon>
+                </button>
+              </mat-expansion-panel-header>
+              <ul type="none">
+                <li>
+                  Rua:
+                  {{ cl.enderecoCliente.rua }}
+                </li>
+                <li>
+                  Bairro:
+                  {{ cl.enderecoCliente.bairro }}
+                </li>
+                <li>
+                  Cidade:
+                  {{ cl.enderecoCliente.cidade }}
+                </li>
+                <li>
+                  UF:
+                  {{ cl.enderecoCliente.uf }}
+                </li>
+              </ul>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <ng-template #adicionarEndereco>
+            <button mat-icon-button matTooltip="Inserir Endereço" (click)="postEndereco(cl.idCliente)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Excluir</th>
+        <td mat-cell *matCellDef="let cl">
+          <button mat-icon-button color="warn" matTooltip="Deletar Cliente" (click)="deletarCliente(cl)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+      <tr mat-row *matRowDef="let row; columns: colunas"></tr>
+    </table>
+  </main>
+</div>

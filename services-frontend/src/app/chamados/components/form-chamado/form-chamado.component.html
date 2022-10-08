@@ -1,0 +1,50 @@
+<div>
+    <h2 mat-dialog-title>Novo Chamado</h2>
+    <mat-spinner color="accent" mode="indeterminate" diameter="20" *ngIf="salvandoChamado"></mat-spinner>
+    <button mat-icon-button color="accent" (click)="confirmarSaida()" matTooltip="Voltar para a lista de chamados" aria-label="Botão de voltar para a página anterior"><mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+  <section mat-dialog-content>
+    <form action="" [formGroup]="formChamado" (ngSubmit)="salvar()">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Título</mat-label>
+        <input
+          type="text"
+          placeholder="Ex: Bateria"
+          matInput
+          formControlName="titulo"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Descrição</mat-label>
+        <input
+          type="text"
+          placeholder="Troca de bateria"
+          matInput
+          formControlName="descricao"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Data da Entrada</mat-label>
+        <input
+          type="date"
+          matInput
+          formControlName="dataEntrada"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Cliente</mat-label>
+        <mat-select formControlName="cliente" name="cliente">
+        <mat-option *ngFor = "let cliente of clientes" [value]="cliente">
+          {{cliente.nome}}
+        </mat-option>
+      </mat-select>
+      </mat-form-field>
+  
+      <button type="submit" [disabled]="formChamado.invalid" mat-raised-button color="accent" id="salvar" matTooltip="Salvar">Salvar</button>
+    </form>
+  </section>
+  

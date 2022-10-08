@@ -1,0 +1,54 @@
+<div class="loader" *ngIf="cargo == undefined; else principal">
+    <p>{{ naoEncontrado == true ? 'Cargo não encontrado' : 'Procurando cargo...' }}</p>
+    <mat-spinner mode="indeterminate" color="primary" *ngIf="naoEncontrado == false"></mat-spinner>
+  </div>
+  <ng-template #principal>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ cargo.nome }}</mat-card-title>
+        <mat-card-subtitle>{{ cargo.descricao }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ cargo.salario | currency: 'BRL'}}</mat-card-subtitle>
+        <button mat-icon-button color="primary" matTooltip="Menu" id="menu" matTooltip="Menu" [mat-menu-trigger-for]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/cargos" matTooltip="Voltar">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+            Voltar
+          </button>
+          <button mat-menu-item matTooltip="Deletar cargo" (click)="deletar()" >
+            <mat-icon>delete</mat-icon>
+            Deletar cargo
+          </button>
+        </mat-menu>
+      </mat-card-header>
+      <mat-card-content>
+        <form action="" [formGroup]="formCargo" (ngSubmit)="salvarAtualizacoes()">
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input type="text" matInput placeholder="Nome" formControlName="nome">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Descrição</mat-label>
+            <input type="text" matInput placeholder="Descriçao" formControlName="descricao">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Salário</mat-label>
+            <input type="number" matInput placeholder="Salário" formControlName="salario">
+          </mat-form-field>
+  
+          <button
+            type="submit"
+            mat-raised-button
+            color="accent"
+          matTooltip="Salvar atualizações"
+            id="salvar"
+            [disabled]="desabilitar"
+          >Salvar atualizações</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>

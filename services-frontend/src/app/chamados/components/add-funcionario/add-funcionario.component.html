@@ -1,0 +1,20 @@
+<div>
+    <h2 mat-dialog-title>Atribuir Funcionário</h2>
+  </div>
+  <section mat-dialog-content>
+    <form action="" [formGroup]="formAddFuncionario" (ngSubmit)="salvarFunc()">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Funcionário</mat-label>
+        <mat-select formControlName="funcionario" name="funcionario">
+        <mat-option *ngFor = "let funcionario of funcionarios" [value]="funcionario.idFuncionario">
+          {{funcionario.nome}}
+        </mat-option>
+      </mat-select>
+      </mat-form-field>
+      
+      <button type="submit" [disabled]="formAddFuncionario.invalid" mat-icon-button id="salvar" matTooltip="Salvar"><mat-icon>save</mat-icon></button>
+    
+    </form>
+  </section>
+  

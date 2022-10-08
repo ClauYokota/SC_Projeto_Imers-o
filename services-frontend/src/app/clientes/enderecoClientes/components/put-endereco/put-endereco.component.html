@@ -1,0 +1,85 @@
+
+  
+    <!-- <button mat-icon-button color="accent"  matTooltip="Voltar para a lista de clientes" aria-label="Botão de voltar para a página anterior"><mat-icon>arrow_back</mat-icon></button>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ cliente.nome }}</mat-card-title>
+        <mat-card-subtitle>{{ cliente.email }}</mat-card-subtitle>
+      </mat-card-header>
+  
+    </mat-card> -->
+        <form
+          action=""
+          [formGroup]="formEndereco"
+          (ngSubmit)="salvarAtualizacoes()"
+        >
+      
+          
+          <mat-form-field appearance="fill">
+            <mat-label
+              >Rua
+              <mat-icon class="mat-icon-formularios">edit</mat-icon></mat-label
+            >
+            <input
+              type="text"
+              matInput
+              placeholder="Rua"
+              formControlName="rua"
+             
+            />
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label
+              >Bairro
+              <mat-icon class="mat-icon-formularios">edit</mat-icon></mat-label
+            >
+            <input
+              type="text"
+              matInput
+              placeholder="Bairro"
+              formControlName="bairro"
+        
+            />
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label
+              >Cidade
+              <mat-icon class="mat-icon-formularios">edit</mat-icon></mat-label
+            >
+            <input
+              type="text"
+              matInput
+              placeholder="Cidade"
+              formControlName="cidade"
+           
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label
+              >UF
+              <mat-icon class="mat-icon-formularios">edit</mat-icon></mat-label
+            >
+            <input
+              type="text"
+              matInput
+              placeholder="UF"
+              formControlName="uf"
+      
+            />
+          </mat-form-field>
+          <button
+            type="submit"
+            mat-raised-button
+            color="accent"
+            id="salvar"
+            matTooltip="Salvar Atualizações"
+            [disabled]="desabilitar"
+          >
+            Salvar atualizações
+          </button>
+        </form>
+ 
+
+  

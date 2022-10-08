@@ -1,0 +1,9 @@
+mat-toolbar-row {
+  display: flex;
+  align-items: center;
+  background-color: #162F48;
+}
+
+.separador {
+  flex-grow: 1;
+}

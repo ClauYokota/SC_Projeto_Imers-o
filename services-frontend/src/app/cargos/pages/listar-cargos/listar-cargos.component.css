@@ -1,0 +1,47 @@
+.container {
+  min-height: calc(100vh - 64px);
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1px 1fr;
+
+  background-repeat: no-repeat;
+  height: calc(100vh - 64px);
+  width: 100vw;
+  background-image: url("../../../../assets/back.png");
+  z-index: -3;
+}
+
+main {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 450px 1fr;
+  padding: 16px;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+table {
+  height: fit-content;
+  background-color: #162f48;
+  border-color: #ffae00;
+  border-style: solid;
+  border-width: 2px;
+
+}
+
+mat-expansion-panel {
+
+  background-color: #162f48;
+  border: 1px solid #ffae00;
+
+}
+
+.ativo {
+  color: rgb(255, 255, 255);
+}
+
+#add {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+}
